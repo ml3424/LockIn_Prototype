@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menuSign"
+        android:title="Sign"
+        android:orderInCategory="100" />
+
+    <item
+        android:id="@+id/menuCred"
+        android:title="Somthing"
+        android:orderInCategory="200" />
+
+    <item
+        android:id="@+id/menuGal"
+        android:title="Gallery"
+        android:orderInCategory="300" />
+
+    <item
+        android:id="@+id/menuPic"
+        android:title="Take a pic"
+        android:orderInCategory="400" />
+
+    <item
+        android:id="@+id/menuSetTime"
+        android:title="Set time period"
+        android:orderInCategory="500" />
+
+    <item
+        android:id="@+id/menuSetTimer"
+        android:title="Set timer"
+        android:orderInCategory="600" />
+
+    <item
+        android:id="@+id/menuAi"
+        android:title="Ai"
+        android:orderInCategory="700" />
+
+</menu>
