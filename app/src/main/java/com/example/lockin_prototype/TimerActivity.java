@@ -104,7 +104,8 @@ public class TimerActivity extends AppCompatActivity {
             // Add your 'Take a pic' logic here
         }
         else if (st.equals("Notification")) {
-            // Add your 'Set time period' logic here
+            Intent si = new Intent(this, NotificationActivity.class);
+            startActivity(si);
         }
         else if (st.equals("Set timer")) {
             // none

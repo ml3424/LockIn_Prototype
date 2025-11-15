@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         String st = item.getTitle().toString();
 
         if (st.equals("Sign")) {
-            // Add your 'Sign' logic here
+            // none
         }
         else if (st.equals("Firebase")) {
             // Add your 'Somthing' logic here
@@ -45,7 +45,8 @@ public class MainActivity extends AppCompatActivity {
             // Add your 'Take a pic' logic here
         }
         else if (st.equals("Notification")) {
-            // Add your 'Set time period' logic here
+            Intent si = new Intent(this, NotificationActivity.class);
+            startActivity(si);
         }
         else if (st.equals("Set timer")) {
             Intent si = new Intent(this, TimerActivity.class);
