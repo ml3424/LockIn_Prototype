@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         if (st.equals("Sign")) {
             // Add your 'Sign' logic here
         }
-        else if (st.equals("Somthing")) {
+        else if (st.equals("Firebase")) {
             // Add your 'Somthing' logic here
         }
         else if (st.equals("Gallery")) {
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         else if (st.equals("Take a pic")) {
             // Add your 'Take a pic' logic here
         }
-        else if (st.equals("Set time period")) {
+        else if (st.equals("Notification")) {
             // Add your 'Set time period' logic here
         }
         else if (st.equals("Set timer")) {
