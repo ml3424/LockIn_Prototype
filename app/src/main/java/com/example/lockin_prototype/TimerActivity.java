@@ -107,6 +107,10 @@ public class TimerActivity extends AppCompatActivity {
             Intent si = new Intent(this, NotificationActivity.class);
             startActivity(si);
         }
+        else if (st.equals("Charger info")) {
+            Intent si = new Intent(this, ChargerInfoActivity.class);
+            startActivity(si);
+        }
         else if (st.equals("Set timer")) {
             // none
         }

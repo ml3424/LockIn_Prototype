@@ -12,12 +12,12 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class MainActivity extends AppCompatActivity {
+public class ChargerInfoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_charger_info);
 
     }
 
@@ -33,7 +33,8 @@ public class MainActivity extends AppCompatActivity {
         String st = item.getTitle().toString();
 
         if (st.equals("Sign")) {
-            // none
+            Intent si = new Intent(this, MainActivity.class);
+            startActivity(si);
         }
         else if (st.equals("Firebase")) {
             // Add your 'Somthing' logic here
@@ -49,8 +50,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(si);
         }
         else if (st.equals("Charger info")) {
-            Intent si = new Intent(this, ChargerInfoActivity.class);
-            startActivity(si);
+            // none
         }
         else if (st.equals("Set timer")) {
             Intent si = new Intent(this, TimerActivity.class);

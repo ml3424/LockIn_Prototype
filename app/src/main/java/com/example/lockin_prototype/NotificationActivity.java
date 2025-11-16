@@ -146,6 +146,10 @@ public class NotificationActivity extends AppCompatActivity {
         else if (st.equals("Notification")) {
             // none
         }
+        else if (st.equals("Charger info")) {
+            Intent si = new Intent(this, ChargerInfoActivity.class);
+            startActivity(si);
+        }
         else if (st.equals("Set timer")) {
             Intent si = new Intent(this, TimerActivity.class);
             startActivity(si);
