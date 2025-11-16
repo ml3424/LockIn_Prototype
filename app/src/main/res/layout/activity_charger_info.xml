@@ -7,4 +7,42 @@
     android:layout_height="match_parent"
     tools:context=".ChargerInfoActivity">
 
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginEnd="139dp"
+        android:onClick="onStopListening"
+        android:text="Stop Listening"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button2" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="135dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="136dp"
+        android:onClick="onStartListening"
+        android:text="Start Listening"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="339dp"
+        android:layout_height="99dp"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="176dp"
+        android:layout_marginEnd="33dp"
+        android:text="Connecting/disconnecting the charger."
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
