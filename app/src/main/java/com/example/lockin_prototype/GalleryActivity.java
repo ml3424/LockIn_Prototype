@@ -1,6 +1,9 @@
 package com.example.lockin_prototype;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +21,9 @@ import androidx.core.view.WindowInsetsCompat;
 import com.bumptech.glide.Glide;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import java.io.File;
+import java.io.IOException;
 
 public class GalleryActivity extends AppCompatActivity {
 
@@ -68,6 +74,12 @@ public class GalleryActivity extends AppCompatActivity {
 
     public void uploadFile(Uri uri) {
         if (uri != null) {
+            final ProgressDialog pd = ProgressDialog.show(
+                    this,
+                    "Uploading Image",
+                    "Please wait...",
+                    true);
+
             // reference to the file(image) path in storage
             StorageReference fileRef = refStorage.child("images/" + STORAGE_FILE_NAME);
 
@@ -78,11 +90,6 @@ public class GalleryActivity extends AppCompatActivity {
                     })
                     .addOnFailureListener(e -> {
                         Toast.makeText(this, "upload failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    })
-                    .addOnProgressListener(snapshot -> {
-                        // show upload progress in the logcat(in the mean time)
-                        double progress = (100.0 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
-                        Log.d("GalleryActivity", "upload progress: " + progress + "%");
                     });
         }
     }
@@ -91,19 +98,29 @@ public class GalleryActivity extends AppCompatActivity {
         // reference to the file to download
         StorageReference fileRef = refStorage.child("images/" + STORAGE_FILE_NAME);
 
-        fileRef.getDownloadUrl()
-                .addOnSuccessListener(uri -> {
-                    // now load the actual http(s) url with Glide
-                    Glide.with(this)
-                            .load(uri) // uri is a standard https:// URL
-                            .placeholder(android.R.drawable.ic_menu_gallery)
-                            .error(android.R.drawable.ic_delete)
-                            .into(iVGalleryPic);
-                    Toast.makeText(this, "download succeeded, loading image...", Toast.LENGTH_SHORT).show();
-                })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(this, "failed to get download url: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                });
+        try {
+            File localFile = File.createTempFile("tempImage", ".jpg");
+
+            fileRef.getFile(localFile)
+                    .addOnSuccessListener(taskSnapshot -> {
+                        Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+
+                        if (bitmap != null) {
+                            iVGalleryPic.setImageBitmap(bitmap);
+                            Toast.makeText(this, "download succeeded!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(this, "failed decoding file", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(e -> {
+                        Toast.makeText(this, "download failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    });
+
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "local file creation failed", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void onPickPic(View view) {
