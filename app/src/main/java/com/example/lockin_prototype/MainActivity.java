@@ -93,7 +93,8 @@ public class MainActivity extends AppCompatActivity {
             startActivity(si);
         }
         else if (st.equals("Gallery")) {
-            // Add your 'Gallery' logic here
+            Intent si = new Intent(this, GalleryActivity.class);
+            startActivity(si);
         }
         else if (st.equals("Take a pic")) {
             // Add your 'Take a pic' logic here
