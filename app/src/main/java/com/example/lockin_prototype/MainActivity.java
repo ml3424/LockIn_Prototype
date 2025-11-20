@@ -97,7 +97,8 @@ public class MainActivity extends AppCompatActivity {
             startActivity(si);
         }
         else if (st.equals("Take a pic")) {
-            // Add your 'Take a pic' logic here
+            Intent si = new Intent(this, CameraActivity.class);
+            startActivity(si);
         }
         else if (st.equals("Notification")) {
             Intent si = new Intent(this, NotificationActivity.class);
