@@ -113,7 +113,8 @@ public class MainActivity extends AppCompatActivity {
             startActivity(si);
         }
         else if (st.equals("Ai")) {
-            // Add your 'Ai' logic here
+            Intent si = new Intent(this, GeminiActivity.class);
+            startActivity(si);
         }
 
         return super.onOptionsItemSelected(item);
