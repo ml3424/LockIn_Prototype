@@ -70,10 +70,11 @@ public class CameraActivity extends AppCompatActivity {
 
             Uri imageUri = FileProvider.getUriForFile(
                     this,
-                    getPackageName() + ".provider",
+                    getPackageName() + ".fileprovider",
                     imgFile
             );
 
+            // implicit Intent: Requests the system to find an Activity that can handle taking a picture.
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
 
@@ -81,7 +82,8 @@ public class CameraActivity extends AppCompatActivity {
                 startActivityForResult(intent, REQUEST_CAMERA);
             }
 
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             Toast.makeText(this, "File creation failed", Toast.LENGTH_SHORT).show();
         }
     }
@@ -92,65 +94,41 @@ public class CameraActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data_back);
 
         if (resultCode == RESULT_OK && requestCode == REQUEST_CAMERA) {
-
-            ProgressDialog pd = ProgressDialog.show(this, "Uploading", "Please wait...", true);
-
-            Date date = Calendar.getInstance().getTime();
-            DateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
-            lastImageName = df.format(date);
-
-            StorageReference fileRef = refStorage.child(lastImageName + ".jpg");
-
             Bitmap bitmap = BitmapFactory.decodeFile(currentPath);
-
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-
-            byte[] data = baos.toByteArray();
-
-            fileRef.putBytes(data)
-                    .addOnSuccessListener(taskSnapshot -> {
-                        pd.dismiss();
-                        Toast.makeText(this, "Upload complete!", Toast.LENGTH_SHORT).show();
-                    })
-                    .addOnFailureListener(e -> {
-                        pd.dismiss();
-                        Toast.makeText(this, "Upload failed!", Toast.LENGTH_SHORT).show();
-                    });
+            iVCamPic.setImageBitmap(bitmap);
         }
     }
 
 
     public void onSave(View view){
 
-        if (lastImageName == null) {
-            Toast.makeText(this, "No image uploaded yet!", Toast.LENGTH_SHORT).show();
+        if (currentPath == null) {
+            Toast.makeText(this, "No image to save!", Toast.LENGTH_SHORT).show();
             return;
         }
+
+        ProgressDialog pd = ProgressDialog.show(this, "Uploading", "Please wait...", true);
+
+        Date date = Calendar.getInstance().getTime();
+        DateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
+        lastImageName = df.format(date);
 
         StorageReference fileRef = refStorage.child(lastImageName + ".jpg");
 
-        try {
-            localFile = File.createTempFile("downloaded_", ".jpg");
-        } catch (IOException e) {
-            Toast.makeText(this, "Local file error", Toast.LENGTH_SHORT).show();
-            return;
-        }
+        Bitmap bitmap = BitmapFactory.decodeFile(currentPath);
 
-        ProgressDialog pd = ProgressDialog.show(this, "Downloading", "Please wait...", true);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] data = baos.toByteArray();
 
-        fileRef.getFile(localFile)
+        fileRef.putBytes(data)
                 .addOnSuccessListener(taskSnapshot -> {
                     pd.dismiss();
-
-                    Bitmap bmp = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                    iVCamPic.setImageBitmap(bmp);
-
-                    Toast.makeText(this, "Download OK!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Upload complete!", Toast.LENGTH_SHORT).show();
                 })
                 .addOnFailureListener(e -> {
                     pd.dismiss();
-                    Toast.makeText(this, "Download failed!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Upload failed!", Toast.LENGTH_SHORT).show();
                 });
     }
 

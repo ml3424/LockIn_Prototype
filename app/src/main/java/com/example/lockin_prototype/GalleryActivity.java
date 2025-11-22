@@ -70,30 +70,6 @@ public class GalleryActivity extends AppCompatActivity {
 
             imageUri = data.getData(); // save uri
             iVGalleryPic.setImageURI(imageUri);
-
-            uploadFile(imageUri); // upload the image to the firebase
-        }
-    }
-
-    public void uploadFile(Uri uri) {
-        if (uri != null) {
-            final ProgressDialog pd = ProgressDialog.show(
-                    this,
-                    "Uploading Image",
-                    "Please wait...",
-                    true);
-
-            // reference to the file(image) path in storage
-            StorageReference fileRef = refStorage.child("images/" + STORAGE_FILE_NAME);
-
-            // put the file (upload it)
-            fileRef.putFile(uri)
-                    .addOnSuccessListener(taskSnapshot -> {
-                        Toast.makeText(this, "upload to storage successful!", Toast.LENGTH_SHORT).show();
-                    })
-                    .addOnFailureListener(e -> {
-                        Toast.makeText(this, "upload failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    });
         }
     }
 
