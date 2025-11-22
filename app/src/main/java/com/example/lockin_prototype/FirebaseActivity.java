@@ -1,6 +1,9 @@
 package com.example.lockin_prototype;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -114,5 +117,48 @@ public class FirebaseActivity extends AppCompatActivity {
 
     public void onEnter(View view) {
         saveData();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        String st = item.getTitle().toString();
+
+        if (st.equals("Sign")) {
+            Intent si = new Intent(this, MainActivity.class);
+            startActivity(si);
+        }
+        else if (st.equals("Gallery")) {
+            Intent si = new Intent(this, GalleryActivity.class);
+            startActivity(si);
+        }
+        else if (st.equals("Take a pic")) {
+            Intent si = new Intent(this, CameraActivity.class);
+            startActivity(si);
+        }
+        else if (st.equals("Notification")) {
+            Intent si = new Intent(this, NotificationActivity.class);
+            startActivity(si);
+        }
+        else if (st.equals("Charger info")) {
+            Intent si = new Intent(this, ChargerInfoActivity.class);
+            startActivity(si);
+        }
+        else if (st.equals("Set timer")) {
+            Intent si = new Intent(this, TimerActivity.class);
+            startActivity(si);
+        }
+        else if (st.equals("Ai")) {
+            Intent si = new Intent(this, GeminiActivity.class);
+            startActivity(si);
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

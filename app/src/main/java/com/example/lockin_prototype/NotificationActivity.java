@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -127,6 +128,13 @@ public class NotificationActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         String st = item.getTitle().toString();
 
@@ -135,16 +143,16 @@ public class NotificationActivity extends AppCompatActivity {
             startActivity(si);
         }
         else if (st.equals("Firebase")) {
-            // Add your 'Somthing' logic here
+            Intent si = new Intent(this, FirebaseActivity.class);
+            startActivity(si);
         }
         else if (st.equals("Gallery")) {
-            // Add your 'Gallery' logic here
+            Intent si = new Intent(this, GalleryActivity.class);
+            startActivity(si);
         }
         else if (st.equals("Take a pic")) {
-            // Add your 'Take a pic' logic here
-        }
-        else if (st.equals("Notification")) {
-            // none
+            Intent si = new Intent(this, CameraActivity.class);
+            startActivity(si);
         }
         else if (st.equals("Charger info")) {
             Intent si = new Intent(this, ChargerInfoActivity.class);
@@ -155,7 +163,8 @@ public class NotificationActivity extends AppCompatActivity {
             startActivity(si);
         }
         else if (st.equals("Ai")) {
-            // Add your 'Ai' logic here
+            Intent si = new Intent(this, GeminiActivity.class);
+            startActivity(si);
         }
 
         return super.onOptionsItemSelected(item);

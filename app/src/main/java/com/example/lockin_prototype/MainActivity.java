@@ -85,10 +85,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         String st = item.getTitle().toString();
 
-        if (st.equals("Sign")) {
-            // none
-        }
-        else if (st.equals("Firebase")) {
+        if (st.equals("Firebase")) {
             Intent si = new Intent(this, FirebaseActivity.class);
             startActivity(si);
         }

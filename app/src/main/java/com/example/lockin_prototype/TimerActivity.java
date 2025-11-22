@@ -95,13 +95,16 @@ public class TimerActivity extends AppCompatActivity {
             startActivity(si);
         }
         else if (st.equals("Firebase")) {
-            // Add your 'Somthing' logic here
+            Intent si = new Intent(this, FirebaseActivity.class);
+            startActivity(si);
         }
         else if (st.equals("Gallery")) {
-            // Add your 'Gallery' logic here
+            Intent si = new Intent(this, GalleryActivity.class);
+            startActivity(si);
         }
         else if (st.equals("Take a pic")) {
-            // Add your 'Take a pic' logic here
+            Intent si = new Intent(this, CameraActivity.class);
+            startActivity(si);
         }
         else if (st.equals("Notification")) {
             Intent si = new Intent(this, NotificationActivity.class);
@@ -111,11 +114,9 @@ public class TimerActivity extends AppCompatActivity {
             Intent si = new Intent(this, ChargerInfoActivity.class);
             startActivity(si);
         }
-        else if (st.equals("Set timer")) {
-            // none
-        }
         else if (st.equals("Ai")) {
-            // Add your 'Ai' logic here
+            Intent si = new Intent(this, GeminiActivity.class);
+            startActivity(si);
         }
 
         return super.onOptionsItemSelected(item);

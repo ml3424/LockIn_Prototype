@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -187,5 +189,48 @@ public class GeminiActivity extends AppCompatActivity {
             Toast.makeText(GeminiActivity.this,"Failed to create temporary file",Toast.LENGTH_LONG);
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        String st = item.getTitle().toString();
+
+        if (st.equals("Sign")) {
+            Intent si = new Intent(this, MainActivity.class);
+            startActivity(si);
+        }
+        else if (st.equals("Firebase")) {
+            Intent si = new Intent(this, FirebaseActivity.class);
+            startActivity(si);
+        }
+        else if (st.equals("Gallery")) {
+            Intent si = new Intent(this, GalleryActivity.class);
+            startActivity(si);
+        }
+        else if (st.equals("Take a pic")) {
+            Intent si = new Intent(this, CameraActivity.class);
+            startActivity(si);
+        }
+        else if (st.equals("Notification")) {
+            Intent si = new Intent(this, NotificationActivity.class);
+            startActivity(si);
+        }
+        else if (st.equals("Charger info")) {
+            Intent si = new Intent(this, ChargerInfoActivity.class);
+            startActivity(si);
+        }
+        else if (st.equals("Set timer")) {
+            Intent si = new Intent(this, TimerActivity.class);
+            startActivity(si);
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
